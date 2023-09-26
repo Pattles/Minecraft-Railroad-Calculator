@@ -14,3 +14,5 @@ A (concept) tool which helps calculate the number of rails needed to travel a sp
 
 ## My progress so far
 <img width="1440" alt="Screenshot 2023-09-24 at 1 58 11 AM" src="https://github.com/Pattles/Minecraft-Railroad-Calculator/assets/57507687/d02608b4-4030-4e9e-ac35-b26e3d952501">
+
+[screen-capture (10).webm](https://github.com/Pattles/Minecraft-Railroad-Calculator/assets/57507687/1c2ffbd3-312b-4502-a4e4-4acde94cde17)
