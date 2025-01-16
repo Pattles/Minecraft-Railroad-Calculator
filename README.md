@@ -4,7 +4,7 @@ A (concept) tool to determine the required amount of normal rails, powered rails
 ## Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
 <p align="center">
-  <img width="515" alt="Screenshot 2025-01-15 at 11 12 31 PM" src="https://github.com/user-attachments/assets/c0b8c27c-08d8-482f-8880-450634cb1f79" />
+  <img width="503" alt="Screenshot 2025-01-15 at 11 17 32 PM" src="https://github.com/user-attachments/assets/95c45c78-4c92-444f-90d7-2b11da708de0" />
 </p>
 
 So if we plug in 1000 blocks for the distance, we would need 375 ingots.
