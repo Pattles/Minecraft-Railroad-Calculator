@@ -3,7 +3,10 @@ A (concept) tool to determine the required amount of normal rails, powered rails
 
 ## Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
-$$\text{num of ingots}=\frac{\text{num of blocks}}{\text{16 rails per craft}}* \text{6 ingots per craft}$$
+<p align="center">
+  <img width="515" alt="Screenshot 2025-01-15 at 11 12 31 PM" src="https://github.com/user-attachments/assets/c0b8c27c-08d8-482f-8880-450634cb1f79" />
+</p>
+
 So if we plug in 1000 blocks for the distance, we would need 375 ingots.
 **TODO: Round to the nearest multiple of 6.**
 
@@ -16,5 +19,7 @@ However, for optimal resource collection, you should place 1 powered rail per 32
 *There should be a formula for powered rails somewhere here...*
 
 For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's literally the same as the iron ingot formula, but $*1$ stick per craft instead of $*6$ ingots. Or in other words, just:
-$$\text{num of sticks}=\frac{\text{num of blocks}}{\text{16 rails per craft}}$$
+<p align="center">
+  <img width="309" alt="Screenshot 2025-01-15 at 11 13 38 PM" src="https://github.com/user-attachments/assets/ae0591a5-49fc-4a4e-aebf-6390fd692545" />
+</p>
 
