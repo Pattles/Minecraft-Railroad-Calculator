@@ -11,15 +11,47 @@ So if we plug in 1000 blocks for the distance, we would need 375 ingots.
 **TODO: Round to the nearest multiple of 6.**
 
 
-However, for optimal resource collection, you should place 1 powered rail per 32 normal rails placed, to maintain max minecart speed in vanilla Minecraft (as of 1.19). This means the recipe for powered rails doesn't require the distance, but rather the amount of normal rails.
+However, for optimal resource collection, you should place 1 powered rail per 32 normal rails placed, to maintain max minecart speed in vanilla Minecraft (as of 1.19). This means the distance would be divided by 32, so in the case of the distance being 1024 blocks, the "real blocks" would be only 32, meaning you'd need 32 powered rails–or just 2 crafts.
 
-*Note: the formula in the code still uses distance since I'm an idiot and I came to this realization after I already wrote the code. In hindsight, it should use the normal rails.*
-**TODO: Rework powered rails formula to use normal rails as the basis, as opposed to distance.**
+*Note: Technically it's 1 powered rail per 33 blocks, but I can't be bothered so I just rounded down.*
 
-*There should be a formula for powered rails somewhere here...*
+So the formula would be:
+*There should be a picture here...*
 
 For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's literally the same as the iron ingot formula, but $*1$ stick per craft instead of $*6$ ingots. Or in other words, just:
 <p align="center">
   <img width="309" alt="Screenshot 2025-01-15 at 11 13 38 PM" src="https://github.com/user-attachments/assets/ae0591a5-49fc-4a4e-aebf-6390fd692545" />
 </p>
 
+## My vision/TODO
+**TODO: Round up crafting recipes to multiples of six, where needed. For example, if you're only travelling 12 blocks, you still need 6 ingots to craft 16 rails, not 4 ingots.
+
+My vision for the output includes the amount of normal rails, powered rails, and redstone torches, along with the necessary resources required to craft them.
+
+The process would look something like this:
+```py
+Enter the starting x & z coords (without commas):
+Enter the destination x & z coords (without commas):
+...
+REQUIRED COMPONENTS:
+Normal rails: 992
+Powered rails: 32
+Redstone torches: 32
+--
+REQUIRED MATERIALS:
+Normal rails:
+   Iron ingots: 384
+   Sticks: 64
+Powered rails:
+   Gold ingots: 12
+   Sticks: 2
+   Redstone dust: 2
+Redstone torches:
+   Sticks: 32
+   Redstone dust: 32
+Total:
+   Iron ingots: 384
+   Gold ingots: 12
+   Sticks: 98
+   Redstone dust: 34
+```
