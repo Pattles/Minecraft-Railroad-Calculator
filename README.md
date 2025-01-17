@@ -24,7 +24,8 @@ For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's lit
 </p>
 
 ## My vision/TODO
-**TODO: Round up crafting recipes to multiples of six, where needed. For example, if you're only travelling 12 blocks, you still need 6 ingots to craft 16 rails, not 4 ingots.
+**TODO: Round up crafting recipes to multiples of six, where needed. For example, if you're only travelling 12 blocks, you still need 6 ingots to craft 16 rails, not 4 ingots.**
+**TODO: Fix docstrings.**
 
 My vision for the output includes the amount of normal rails, powered rails, and redstone torches, along with the necessary resources required to craft them.
 
