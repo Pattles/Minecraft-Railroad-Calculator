@@ -24,7 +24,9 @@ So the formula would be:
 </p> -->
 
 ```math
-\text{real blocks} = \frac{\text{\# blocks}}{32}\\
+\text{real blocks} = \frac{\text{\# blocks}}{32}
+```
+```math
 \text{\# powered rails} = \frac{\text{real blocks}}{\text{16 rails per craft}}*\text{6 ingots per craft}
 ```
 
