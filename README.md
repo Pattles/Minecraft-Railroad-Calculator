@@ -27,8 +27,8 @@ For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's lit
 My vision for the output includes the amount of normal rails, powered rails, and redstone torches, along with the necessary resources required to craft them.
 
 ```py
-Enter the starting x & z coords (without commas):
-Enter the destination x & z coords (without commas):
+Enter the starting x & z coords (without commas): 1024 0
+Enter the destination x & z coords (without commas): 0 0
 ...
 REQUIRED COMPONENTS:
 Normal rails: 992
