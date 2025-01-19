@@ -1,6 +1,11 @@
 # Minecraft Railroad Calculator
 A (concept) tool to determine the required amount of normal rails, powered rails, and redstone torches to travel from one coordinate to another (e.g. (1024, 0) to (0, 0)).
 
+The entire project can be split into 3 key segments, which are the following:
+1. Develop the back-end, which includes the formulas, logic, and pretty much everything else needed for an MVP. ✅
+2. Develop the GUI and add logic that connects the back-end to the front-end.
+3. Port the whole thing to my [website](https://pserikov.com).
+
 ## Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
 
