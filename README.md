@@ -39,7 +39,7 @@ For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's lit
 ```math
 \text{\# sticks} = \frac{\text{\# blocks}}{\text{16 rails per craft}}
 ```
-However, I didn't do use the formula since the amount of redstone torches you need is literally the amount of powered rails you use. This is literally the (simplified) function that handles redstone torches:
+However, I didn't use the formula since the amount of redstone torches you need is literally the amount of powered rails you use. This is literally the (simplified) function that handles redstone torches:
 ```py
 redstone_torches = powered_rails
 sticks = powered_rails
