@@ -3,9 +3,14 @@ A (concept) tool to determine the required amount of normal rails, powered rails
 
 ## Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
-<p align="center">
+
+```math
+\text{\# iron ingots} = \frac{\text{\# blocks}}{\text{16 rails per craft}}*\text{6 iron per craft}
+```
+
+<!-- <p align="center">
   <img width="503" alt="Screenshot 2025-01-15 at 11 17 32 PM" src="https://github.com/user-attachments/assets/95c45c78-4c92-444f-90d7-2b11da708de0" />
-</p>
+</p> -->
 
 So if we plug in 1000 blocks for the distance, we would need 375 ingots. However, you can't craft 1000 rails with 375 ingots, since every recipe requires 6 ingots for 16 rails. To solve this, the minimum_craft() function rounds every recipe to the nearest multiple of 6.
 
@@ -14,14 +19,24 @@ In addition, for optimal resource collection, you should place 1 powered rail pe
 *Note: Technically it's 1 powered rail per 33 blocks, but I can't be bothered so I just rounded down.*
 
 So the formula would be:
-<p align="center">
+<!-- <p align="center">
   <img width="582" alt="Screenshot 2025-01-19 at 2 46 46 PM" src="https://github.com/user-attachments/assets/2dd2ef3d-b175-421e-8fe3-ab7d6e68e2cb" />
-</p>
+</p> -->
+
+```math
+\text{real blocks} = \frac{\text{\# blocks}}{32}\\
+\text{\# powered rails} = \frac{\text{real blocks}}{\text{16 rails per craft}}*\text{6 ingots per craft}
+```
 
 For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's literally the same as the iron ingot formula, but $*1$ stick per craft instead of $*6$ ingots. Or in other words, just:
-<p align="center">
+
+<!-- <p align="center">
   <img width="309" alt="Screenshot 2025-01-15 at 11 13 38 PM" src="https://github.com/user-attachments/assets/ae0591a5-49fc-4a4e-aebf-6390fd692545" />
-</p>
+</p> -->
+
+```math
+\text{\# sticks} = \frac{\text{\# blocks}}{\text{16 rails per craft}}
+```
 
 ## Output
 My vision for the output includes the amount of normal rails, powered rails, and redstone torches, along with the necessary resources required to craft them.
