@@ -1,5 +1,5 @@
 # Minecraft Railroad Calculator
-A (concept) tool to determine the required amount of normal rails, powered rails, and redstone torches to travel from one coordinate to another (e.g. (1000, 1000) to (0, 0)).
+A (concept) tool to determine the required amount of normal rails, powered rails, and redstone torches to travel from one coordinate to another (e.g. (1024, 0) to (0, 0)).
 
 ## Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
@@ -38,6 +38,12 @@ For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's lit
 
 ```math
 \text{\# sticks} = \frac{\text{\# blocks}}{\text{16 rails per craft}}
+```
+However, I didn't do use the formula since the amount of redstone torches you need is literally the amount of powered rails you use. This is literally the (simplified) function that handles redstone torches:
+```py
+redstone_torches = powered_rails
+sticks = powered_rails
+redstone = powered_rails
 ```
 
 ## Output
