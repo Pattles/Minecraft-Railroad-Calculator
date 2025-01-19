@@ -14,7 +14,9 @@ In addition, for optimal resource collection, you should place 1 powered rail pe
 *Note: Technically it's 1 powered rail per 33 blocks, but I can't be bothered so I just rounded down.*
 
 So the formula would be:
-*There should be a picture here...*
+<p align="center">
+  <img width="582" alt="Screenshot 2025-01-19 at 2 46 46 PM" src="https://github.com/user-attachments/assets/2dd2ef3d-b175-421e-8fe3-ab7d6e68e2cb" />
+</p>
 
 For **redstone torches/sticks** required for a rail craft is $0.0675b$. It's literally the same as the iron ingot formula, but $*1$ stick per craft instead of $*6$ ingots. Or in other words, just:
 <p align="center">
