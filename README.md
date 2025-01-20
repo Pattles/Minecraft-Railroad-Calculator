@@ -6,7 +6,8 @@ The entire project can be split into 3 key segments, which are the following:
 2. Develop the GUI and add logic that connects the back-end to the front-end.
 3. Port the whole thing to my <a href="https://pserikov.com" target="_blank">website</a>.
 
-## Formulas
+## Segment 1: Back-end
+### Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
 
 ```math
@@ -51,7 +52,7 @@ self.sticks = powered_rails
 self.redstone = powered_rails
 ```
 
-## Output
+### Output
 My vision for the output includes the amount of normal rails, powered rails, and redstone torches, along with the necessary resources required to craft them.
 
 ```py
@@ -80,3 +81,10 @@ Total:
    Sticks: 98
    Redstone dust: 34
 ```
+
+## Segment 2: Design
+My vision for the design is cute and minimalistic. When searching for resource calculators online, they're all blocky and resemble Minecraft. I don't want to do that, since it's the same literally everywhere.
+<p align="center">
+  <img width="503" alt="Screenshot 2025-01-15 at 11 17 32 PM" src="https://github.com/user-attachments/assets/1a7847e8-dae5-4ea6-b0e6-f3c9b174643b" />
+</p>
+
