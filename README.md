@@ -3,7 +3,7 @@ A (concept) tool to determine the required amount of normal rails, powered rails
 
 The entire project can be split into 3 key segments, which are the following:
 1. Develop the back-end, which includes the formulas, logic, and pretty much everything else needed for an MVP. ✅
-2. Develop the GUI and add logic that connects the back-end to the front-end.
+2. Develop the GUI and add logic that connects the back-end to the front-end. **almost done, probably**
 3. Port the whole thing to my <a href="https://pserikov.com" target="_blank">website</a>.
 
 ## Segment 1: Back-end
