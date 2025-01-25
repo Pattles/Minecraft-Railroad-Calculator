@@ -229,7 +229,7 @@ class CraftingRecipe {
 
         // Updating Totals table
         let rowTotalsNormalRails = document.getElementById('totals-normal-rails');
-        rowTotalsNormalRails.children[1].textContent = normalRailsDict['rails'];
+        rowTotalsNormalRails.children[1].textContent = normalRailsReq;
 
         let rowTotalsPoweredRails = document.getElementById('totals-powered-rails');
         rowTotalsPoweredRails.children[1].textContent = poweredRailsDict['rails'];
