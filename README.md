@@ -54,7 +54,8 @@ self.redstone = powered_rails
 
 ### Output
 My vision for the output includes the amount of normal rails, powered rails, and redstone torches, along with the necessary resources required to craft them.
-**TODO: Somehow begin implementing this...**
+**TODO: Add docstrings for index.html**
+**TODO: Add more stuff to readme**
 
 ```py
 Enter the starting x & z coords (without commas): 1024 0
