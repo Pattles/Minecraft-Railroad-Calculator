@@ -4,87 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Rails Calculator</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #f9f6e8;
-            margin: 20px;
-            font-family: 'Verdana'
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 10px;
-            border: 2px solid black;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: #ffffe0;
-        }
-
-        .header {
-            grid-column: span 2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid black;
-            padding-bottom: 10px;
-        }
-
-        .section {
-            border: 1px solid black;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        h2, h3 {
-            margin-bottom: 10px;
-        }
-
-        .section h3 {
-            text-align: center;
-            padding: 5px;
-            border: 1px solid black;
-            border-radius: 5px;
-            display: inline-block;
-            background-color: #f5f5dc;
-        }
-
-        input[type="text"] {
-            padding: 5px;
-            margin-bottom: 10px;
-            margin-top: 5px;
-            width: 100%;
-        }
-
-        button {
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid black;
-            border-radius: 5px;
-            background-color: #f5f5dc;
-            cursor: pointer;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 10px;
-            border-collapse: collapse;
-        }
-
-        td {
-            padding: 5px 0;
-        }
-
-        td:first-child {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/hover.css">
     <script src="js/func.js" defer></script>
 </head>
 <body>
@@ -106,8 +27,15 @@
         <div class="section">
             <h3>Normal Rails</h3>
             <table>
-                <tr id="normal-rails"><td>Normal rails</td><td>0</td></tr>
-                <tr id="normal-rails-iron-ingots"><td>Iron ingots</td><td>0</td></tr>
+                <tr id="normal-rails"><td>Normal rails</td>
+                    <td><span class="tooltip-container">0
+                        <div class="tooltip-text" id="normal-rails-tooltip">0 stacks</div>
+                    </span></td></tr>
+                    <!-- <td>0</td></tr> -->
+                <tr id="normal-rails-iron-ingots"><td>Iron ingots</td>
+                    <td><span class="tooltip-container">0
+                        <div class="tooltip-text" id="normal-rails-tooltip">This is a tooltip</div>
+                    </span></td></tr>
                 <tr id="normal-rails-sticks"><td>Sticks</td><td>0</td></tr>
             </table>
         </div>

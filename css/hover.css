@@ -1,29 +1,24 @@
-/* Tooltip Container for Hover */
 .tooltip-container {
-    position: relative; /* Ensures the tooltip is positioned relative to the number */
-    cursor: pointer; /* Adds a pointer cursor for the hover effect */
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
 
-/* Tooltip Text */
 .tooltip-text {
     visibility: hidden;
     width: 120px;
     background-color: black;
-    color: #fff;
+    color: white;
     text-align: center;
     border-radius: 5px;
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: 125%; /* Position the tooltip above the number */
+    bottom: 100%; /* Position above the number */
     left: 50%;
-    margin-left: -60px; /* Offset the tooltip to center it */
-    opacity: 0;
-    transition: opacity 0.3s;
+    margin-left: -60px; /* Center the tooltip */
 }
 
-/* Show Tooltip on Hover */
 .tooltip-container:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible; /* Show on hover */
 }

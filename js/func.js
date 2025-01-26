@@ -18,6 +18,55 @@ function railDistance(coord1, coord2) {
     return distance
 }
 
+function stacks(amount) {
+    /*
+    Calculates the amount of stacks (1 stack = 64 items) and remainder from a non-simplified integer.
+    */
+
+    let numStacks = 0;
+    let numRemainder = 0;
+    // If there's an even amount of stacks, return the amount of stacks and nothing left over.
+    if (amount % 64 == 0) {
+        numStacks = Math.floor(amount / 64 );
+        return [numStacks, 0];
+    }
+    // Otherwise, return the amount of stacks and the remainder.
+    numStacks = Math.floor(amount / 64);
+    numRemainder = 64 - (amount % 64);
+    return [numStacks, numRemainder];
+}
+
+function displayStacks(amount) {
+    let numStacks = stacks(amount)[0]
+    let numRemainder = stacks(amount)[1]
+    let message = ''
+
+    // TODO: Fix - doesn't work even when more than 1 stack
+    // It keeps saying there's **1 stack**
+
+    // If there is an even stack – TODO: improve comment
+    if (numRemainder == 0) {
+
+        if (numStacks == 1) {
+            message = '1 stack'    
+        } else {
+            message = String(numStacks) + ' stacks';
+        }
+
+    // If there is an uneven stack – TODO: improve comment
+    } else {
+
+        if (numStacks == 1) {
+            message = '1 stack and ' + String(numRemainder);
+        } else {
+            message = String(numStacks) + ' stacks and ' + String(numRemainder);
+        }
+    }
+
+    return message;
+
+}
+
 class CraftingRecipe {
     constructor(blocks) {
         this.blocks = blocks;
@@ -196,7 +245,13 @@ class CraftingRecipe {
 
         // Updating Normal Rails table
         let rowNormalRails = document.getElementById('normal-rails');
-        rowNormalRails.children[1].textContent = normalRailsReq;
+        // rowNormalRails.children[1].textContent = normalRailsReq;
+        let tooltipContainer = rowNormalRails.children[1].querySelector('.tooltip-container');
+        tooltipContainer.firstChild.textContent = normalRailsReq;
+
+        let tooltipNormalRails = document.getElementById('normal-rails-tooltip')
+        tooltipNormalRails.textContent = displayStacks(normalRailsReq)
+
 
         let rowNormalRailsIronIngots = document.getElementById('normal-rails-iron-ingots');
         rowNormalRailsIronIngots.children[1].textContent = normalRailsDict['ironIngots'];
@@ -248,6 +303,10 @@ class CraftingRecipe {
 
         let rowTotalsRedstone = document.getElementById('totals-redstone');
         rowTotalsRedstone.children[1].textContent = totalsDict['redstone'];
+
+        // Testing
+        // let tooltip = document.getElementById('normal-rails-tooltip')
+        // console.log(tooltip)
 
         }
     }
