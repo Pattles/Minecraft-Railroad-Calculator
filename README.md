@@ -6,8 +6,6 @@ The entire project can be split into 3 key segments, which are the following:
 2. Develop the GUI and add logic that connects the back-end to the front-end. ✅
 3. Port the whole thing to my <a href="https://pserikov.com" target="_blank">website</a>.
 
-**TODO: QA testing (e.g. what happens when you enter letters instead of coords?, what happens when you enter only the x coords?)**
-
 ## Segment 1: Back-end
 ### Formulas
 The quick formula for **iron ingots** required for a rail (normal/powered) craft is $0.375b$, where $b$ is the distance. Here's how I got to that formula:
