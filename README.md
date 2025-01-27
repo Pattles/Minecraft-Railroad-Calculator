@@ -90,3 +90,7 @@ My vision for the design is cute and minimalistic. When searching for resource c
   <img width="503" alt="Screenshot 2025-01-15 at 11 17 32 PM" src="https://github.com/user-attachments/assets/1a7847e8-dae5-4ea6-b0e6-f3c9b174643b" />
 </p>
 
+The design I ~~stole from ChatGPT~~ made looks like this:
+<p align="center">
+  <img width="778" alt="Screenshot 2025-01-26 at 8 10 35 PM" src="https://github.com/user-attachments/assets/9a0b2434-177a-4ba0-bcb9-cee24e92b74c" />
+</p>
