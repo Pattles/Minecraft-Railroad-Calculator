@@ -3,8 +3,10 @@ A (concept) tool to determine the required amount of normal rails, powered rails
 
 The entire project can be split into 3 key segments, which are the following:
 1. Develop the back-end, which includes the formulas, logic, and pretty much everything else needed for an MVP. ✅
-2. Develop the GUI and add logic that connects the back-end to the front-end. **almost done, probably**
+2. Develop the GUI and add logic that connects the back-end to the front-end. ✅
 3. Port the whole thing to my <a href="https://pserikov.com" target="_blank">website</a>.
+
+**TODO: QA testing (e.g. what happens when you enter letters instead of coords?, what happens when you enter only the x coords?)**
 
 ## Segment 1: Back-end
 ### Formulas
@@ -84,4 +86,6 @@ The design I ~~stole from ChatGPT~~ made is below. I'll eventually make it look 
 
 In addition to the logic behind finding out the numbers for the distances (e.g. gold ingots, sticks, rails, etc.), I added a feature, where when you hover over a number, that displays the amount of stacks and remainder left over needed, so you won't need to use a calculator afterwards. It was a complete shitshow when developing it since I was simultaneously learning Javascript and subsequently rewriting all of the logic from Python into js.
 
-**TODO: There should be an image showing the tooltip in effect somewhere here...**
+<p align="center">
+   <img width="390" alt="image" src="https://github.com/user-attachments/assets/da1072a9-66f2-4df9-9904-1aae4af62316" />
+</p>
