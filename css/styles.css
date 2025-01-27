@@ -42,6 +42,8 @@ h2, h3 {
 .section h3 {
     text-align: center;
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: 1px solid black;
     border-radius: 5px;
     display: inline-block;
