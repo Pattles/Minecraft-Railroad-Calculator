@@ -79,7 +79,6 @@ function updateTableRow(trId, tooltipId, resourceKey, resourceDict) {
     tooltip.textContent = displayStacks(resourceDict[resourceKey]); // Num stacks & remainder tooltip
 }
 
-
 class CraftingRecipe {
     constructor(blocks) {
         this.blocks = blocks;
@@ -401,10 +400,47 @@ class CraftingRecipe {
         }
     }
 
+function invalidInputCheck() {
+    const inputStartCoord = document.getElementById('start-coord').value;
+    const inputEndCoord = document.getElementById('end-coord').value;
+    
+    // If input contains letters
+    const regexContainsLetters = /[^\d\s]/;
+    if (regexContainsLetters.test(inputStartCoord) == true || regexContainsLetters.test(inputEndCoord) == true) {
+        alert('Invalid input. Please enter coordinates as numbers (e.g. "0 0").')
+        return 0;
+    }
+
+    // If improper convention (e.g. 0 instead of 0 0)
+    const regexFollowsConvention = /^-?\d+\s+-?\d+$/
+    if (!regexFollowsConvention.test(inputStartCoord.trim()) || !regexFollowsConvention.test(inputEndCoord.trim())) {
+        alert('Improper coordinate format. Please enter coordinates as "x y" (e.g., "0 0").');
+        return 0;
+    }
+
+    // If input is bigger than 30 million
+    let combinedCoords = inputStartCoord.split(' ').concat(inputEndCoord.split(' '))
+    for (let num of combinedCoords) {
+        if (Math.abs(Number(num)) > 30_000_000) {
+            alert('Coordinates are larger than 30 million. Please enter smaller coordinates.');
+            return 0;
+        }
+    }
+
+    return 1;
+    
+}
+
 function buttonSubmit() {
+    // Running checks in case of invalid input
+    if (invalidInputCheck() == 0) {
+        console.log('Invalid input, killing the rest of the function.');
+        return;
+    }
+    
     // Retrieving the required distance between 2 coords
-    const inputStartCoord = document.getElementById('start-coord').value.split(' ');
-    const inputEndCoord = document.getElementById('end-coord').value.split(' ');
+    const inputStartCoord = document.getElementById('start-coord').value.trim().split(' ');
+    const inputEndCoord = document.getElementById('end-coord').value.trim().split(' ');
 
     let inputBlocks = railDistance(inputStartCoord, inputEndCoord);
     let cRecipe = new CraftingRecipe(inputBlocks);
