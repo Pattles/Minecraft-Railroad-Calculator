@@ -32,7 +32,7 @@ function stacks(amount) {
     }
     // Otherwise, return the amount of stacks and the remainder.
     numStacks = Math.floor(amount / 64);
-    numRemainder = 64 - (amount % 64);
+    numRemainder = amount % 64
     return [numStacks, numRemainder];
 }
 
@@ -41,31 +41,44 @@ function displayStacks(amount) {
     let numRemainder = stacks(amount)[1]
     let message = ''
 
-    // TODO: Fix - doesn't work even when more than 1 stack
-    // It keeps saying there's **1 stack**
-
-    // If there is an even stack – TODO: improve comment
-    if (numRemainder == 0) {
-
-        if (numStacks == 1) {
-            message = '1 stack'    
-        } else {
-            message = String(numStacks) + ' stacks';
-        }
-
-    // If there is an uneven stack – TODO: improve comment
+    if (numStacks == 0) {
+        message = `${numRemainder} item${numRemainder == 1 ? '' : 's'}`
+    } else if (numRemainder == 0) {
+        message = `${numStacks} stack${numStacks == 1 ? '' : 's'}`;
     } else {
-
-        if (numStacks == 1) {
-            message = '1 stack and ' + String(numRemainder);
-        } else {
-            message = String(numStacks) + ' stacks and ' + String(numRemainder);
-        }
+        message = `${numStacks} stack${numStacks == 1 ? '' : 's'} and ${numRemainder} item${numRemainder == 1 ? '' : 's'}`;
     }
 
     return message;
 
 }
+
+function updateTableRow(trId, tooltipId, resourceKey, resourceDict) {
+    /**
+    * Updates a table row's required resources and tooltip text.
+    *
+    * @param {string} rowId - The ID of the table row to update.
+    * @param {string} tooltipId - The ID of the tooltip element to update.
+    * @param {string} resourceKey - The key in the resource dictionary corresponding to the resource value.
+    * @param {Object} resourceDict - An object containing resource values keyed by resource names.
+    *
+    * @example
+    * const resources = { torches: 128, sticks: 64 };
+    * updateTableRow('redstone-torches', 'redstone-torches-tooltip-torches', 'torches', resources);
+    */
+
+    // Locate the row and tooltip container
+    let tr = document.getElementById(trId);
+    let ttContainer = tr.children[1].querySelector('.tooltip-container');
+
+    // Update the tr textContent with the required resource amount (e.g. 0, 1024, etc.)
+    ttContainer.firstChild.textContent = resourceDict[resourceKey]; // Req resources
+
+    // Update the tooltip text with stacks and remainder
+    let tooltip = document.getElementById(tooltipId);
+    tooltip.textContent = displayStacks(resourceDict[resourceKey]); // Num stacks & remainder tooltip
+}
+
 
 class CraftingRecipe {
     constructor(blocks) {
@@ -124,26 +137,6 @@ class CraftingRecipe {
         return amount;
         }
     
-    normalRail() {
-        /*
-        Calculates the resources required to craft normal rails based on the number 
-        of blocks in the travel distance. 
-        
-        This method computes the required quantities of iron ingots and sticks 
-        for the powered rails, ensuring that minimum crafting thresholds are met (e.g., iron ingots).
-
-        Returns:
-            None: Updates the `resources['normalRails']` dictionary with:
-                - 'rails' (int): The number of powered rail blocks required.
-                - 'ironIngots' (int): The number of iron ingots needed.
-                - 'sticks' (int): The number of sticks needed.
-        */
-        this.resources['normalRails']['rails'] = this.blocks;
-        this.resources['normalRails']['ironIngots'] = this.minimumCraft('ironIngot', Math.ceil(this.blocks * 0.375));
-        this.resources['normalRails']['sticks'] = Math.ceil(this.blocks * 0.0625);
-        return;
-        }
-
     poweredRail() {
         /*
         Calculates the resources required to craft powered rails based on the travel distance.
@@ -169,6 +162,32 @@ class CraftingRecipe {
         this.resources['poweredRails']['goldIngots'] = this.minimumCraft('goldIngot', Math.ceil(poweredBlocks * 0.375));
         this.resources['poweredRails']['sticks'] = Math.ceil(poweredBlocks * 0.0625);
         this.resources['poweredRails']['redstone'] = Math.ceil(poweredBlocks * 0.0625);
+        return;
+        }
+
+    normalRail() {
+        /*
+        Calculates the resources required to craft normal rails based on the number 
+        of blocks in the travel distance. 
+        
+        This method computes the required quantities of iron ingots and sticks 
+        for the powered rails, ensuring that minimum crafting thresholds are met (e.g., iron ingots).
+
+        Returns:
+            None: Updates the `resources['normalRails']` dictionary with:
+                - 'rails' (int): The number of powered rail blocks required.
+                - 'ironIngots' (int): The number of iron ingots needed.
+                - 'sticks' (int): The number of sticks needed.
+        */
+        // Calculate the actual number of normal rails required. 
+        // This is determined by subtracting the number of powered rails from the total rails needed,
+        // as powered rails replace some normal rails along the track.
+        let actualBlocks = this.blocks - this.resources['poweredRails']['rails']
+
+        
+        this.resources['normalRails']['rails'] = actualBlocks;
+        this.resources['normalRails']['ironIngots'] = this.minimumCraft('ironIngot', Math.ceil(actualBlocks * 0.375));
+        this.resources['normalRails']['sticks'] = Math.ceil(actualBlocks * 0.0625);
         return;
         }
 
@@ -230,11 +249,6 @@ class CraftingRecipe {
         let poweredRailsDict = this.resources['poweredRails'];
         let redstoneTorchesDict = this.resources['redstoneTorches'];
 
-        // Calculate the actual number of normal rails required. 
-        // This is determined by subtracting the number of powered rails from the total rails needed,
-        // as powered rails replace some normal rails along the track.
-        let normalRailsReq = normalRailsDict["rails"] - poweredRailsDict["rails"];
-
         // Computing totals for all required materials across all components
         let totalsDict = {
             'ironIngots':this.minimumCraft('ironIngot', normalRailsDict['ironIngots']),
@@ -244,70 +258,146 @@ class CraftingRecipe {
             };
 
         // Updating Normal Rails table
-        let rowNormalRails = document.getElementById('normal-rails');
-        // rowNormalRails.children[1].textContent = normalRailsReq;
-        let tooltipContainer = rowNormalRails.children[1].querySelector('.tooltip-container');
-        tooltipContainer.firstChild.textContent = normalRailsReq;
+        // Rails
+        updateTableRow(
+            'normal-rails',
+            'normal-rails-tooltip',
+            'rails',
+            normalRailsDict
+        );
 
-        let tooltipNormalRails = document.getElementById('normal-rails-tooltip')
-        tooltipNormalRails.textContent = displayStacks(normalRailsReq)
+        // Iron Ingots
+        updateTableRow(
+            'normal-rails-iron-ingots',
+            'normal-rails-tooltip-iron-ingots',
+            'ironIngots',
+            normalRailsDict
+        );
 
-
-        let rowNormalRailsIronIngots = document.getElementById('normal-rails-iron-ingots');
-        rowNormalRailsIronIngots.children[1].textContent = normalRailsDict['ironIngots'];
-
-        let rowNormalRailsSticks = document.getElementById('normal-rails-sticks');
-        rowNormalRailsSticks.children[1].textContent = normalRailsDict['sticks'];
+        // Sticks
+        updateTableRow(
+            'normal-rails-sticks',
+            'normal-rails-tooltip-sticks',
+            'sticks',
+            normalRailsDict
+        );
 
         // Updating Redstone Torches table
-        let rowRedstoneTorches = document.getElementById('redstone-torches');
-        rowRedstoneTorches.children[1].textContent = redstoneTorchesDict['torches'];
+        // Torches
+        updateTableRow(
+            'redstone-torches',
+            'redstone-torches-tooltip-torches',
+            'torches',
+            redstoneTorchesDict
+        );
 
-        let rowRedstoneTorchesSticks = document.getElementById('redstone-torches-sticks');
-        rowRedstoneTorchesSticks.children[1].textContent = redstoneTorchesDict['sticks'];
-
-        let rowRedstoneTorchesRedstone = document.getElementById('redstone-torches-redstone');
-        rowRedstoneTorchesRedstone.children[1].textContent = redstoneTorchesDict['redstone'];
+        // Sticks
+        updateTableRow(
+            'redstone-torches-sticks',
+            'redstone-torches-tooltip-sticks',
+            'sticks',
+            redstoneTorchesDict
+        );
+        
+        // Redstone
+        updateTableRow(
+            'redstone-torches-redstone',
+            'redstone-torches-tooltip-redstone',
+            'redstone',
+            redstoneTorchesDict
+        );
 
         // Updating Powered Rails table
-        let rowPoweredRails = document.getElementById('powered-rails');
-        rowPoweredRails.children[1].textContent = poweredRailsDict['rails'];
+        // Rails
+        updateTableRow(
+            'powered-rails',
+            'powered-rails-tooltip-rails',
+            'rails',
+            poweredRailsDict
+        );
 
-        let rowPoweredRailsGoldIngots = document.getElementById('powered-rails-gold-ingots');
-        rowPoweredRailsGoldIngots.children[1].textContent = poweredRailsDict['goldIngots'];
+        // Gold Ingots
+        updateTableRow(
+            'powered-rails-gold-ingots',
+            'powered-rails-tooltip-gold-ingots',
+            'goldIngots',
+            poweredRailsDict
+        );
 
-        let rowPoweredRailsSticks = document.getElementById('powered-rails-sticks');
-        rowPoweredRailsSticks.children[1].textContent = poweredRailsDict['sticks'];
+        // Sticks
+        updateTableRow(
+            'powered-rails-sticks',
+            'powered-rails-tooltip-sticks',
+            'sticks',
+            poweredRailsDict
+        );
 
-        let rowPoweredRailsRedstone = document.getElementById('powered-rails-redstone');
-        rowPoweredRailsRedstone.children[1].textContent = poweredRailsDict['redstone'];
+        // Redstone
+        updateTableRow(
+            'powered-rails-redstone',
+            'powered-rails-tooltip-redstone',
+            'redstone',
+            poweredRailsDict
+        );
 
+    
         // Updating Totals table
-        let rowTotalsNormalRails = document.getElementById('totals-normal-rails');
-        rowTotalsNormalRails.children[1].textContent = normalRailsReq;
+        // Normal Rails
+        updateTableRow(
+            'totals-normal-rails',
+            'totals-tooltip-normal-rails',
+            'rails',
+            normalRailsDict
+        );
 
-        let rowTotalsPoweredRails = document.getElementById('totals-powered-rails');
-        rowTotalsPoweredRails.children[1].textContent = poweredRailsDict['rails'];
+        // Powered Rails
+        updateTableRow(
+            'totals-powered-rails',
+            'totals-tooltip-powered-rails',
+            'rails',
+            poweredRailsDict
+        );
 
-        let rowTotalsRedstoneTorches = document.getElementById('totals-redstone-torches');
-        rowTotalsRedstoneTorches.children[1].textContent = redstoneTorchesDict['torches'];
+        // Redstone Torches
+        updateTableRow(
+            'totals-redstone-torches',
+            'totals-tooltip-redstone-torches',
+            'torches',
+            redstoneTorchesDict
+        );
 
-        let rowTotalsIronIngots = document.getElementById('totals-iron-ingots');
-        rowTotalsIronIngots.children[1].textContent = totalsDict['ironIngots'];
+        // Iron Ingots
+        updateTableRow(
+            'totals-iron-ingots',
+            'totals-tooltip-iron-ingots',
+            'ironIngots',
+            totalsDict
+        );
 
-        let rowTotalsGoldIngots = document.getElementById('totals-gold-ingots');
-        rowTotalsGoldIngots.children[1].textContent = totalsDict['goldIngots'];
+        // Gold Ingots
+        updateTableRow(
+            'totals-gold-ingots',
+            'totals-tooltip-gold-ingots',
+            'goldIngots',
+            totalsDict
+        );
 
-        let rowTotalsSticks = document.getElementById('totals-sticks');
-        rowTotalsSticks.children[1].textContent = totalsDict['sticks'];
+        // Sticks
+        updateTableRow(
+            'totals-sticks',
+            'totals-tooltip-sticks',
+            'sticks',
+            totalsDict
+        );
 
-        let rowTotalsRedstone = document.getElementById('totals-redstone');
-        rowTotalsRedstone.children[1].textContent = totalsDict['redstone'];
-
-        // Testing
-        // let tooltip = document.getElementById('normal-rails-tooltip')
-        // console.log(tooltip)
-
+        // Redstone
+        updateTableRow(
+            'totals-redstone',
+            'totals-tooltip-redstone',
+            'redstone',
+            totalsDict
+        );
+        
         }
     }
 
@@ -320,8 +410,8 @@ function buttonSubmit() {
     let cRecipe = new CraftingRecipe(inputBlocks);
 
     // Calculating resources required
-    cRecipe.normalRail();
     cRecipe.poweredRail();
+    cRecipe.normalRail();
     cRecipe.redstoneTorch(cRecipe.resources['poweredRails']['rails']);
 
     // Displaying all of it
